@@ -48,6 +48,16 @@ def wrangle_single_family_residential():
     # rename columns
     df = df.rename(columns={'bedroomcnt': 'bedroom','bathroomcnt': 'bathroom',
             'calculatedfinishedsquarefeet': 'squarefeet','taxvaluedollarcnt': 'tax_value'})
+
+    #Creating new column for home age using year_built, casting as float
+    df['home_age'] = 2017- df['yearbuilt']
+    df["home_age"] = df["home_age"].astype('float')
+
+    # Relabeling FIPS data
+    df['fips'] = df.fips.replace({6037:'Los Angeles',
+                       6059:'Orange',
+                       6111:'Ventura'})
+    
     return df
 
 
